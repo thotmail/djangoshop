@@ -1,0 +1,23 @@
+{% extends "shop/base_generic.html" %}
+
+{% block content %}
+
+<h1>Cart</h1>
+<ul class='data-list'>
+{% for o in objects %}
+    <li>
+        <a href="{% url 'shop:product_detail' o.p.pk %}">{{ o.p.name | title}}</a> 
+        - {{ o.p.price }} Qty. {{o.q}}
+    </li>
+{% empty %}
+    <li>Your cart is empty</li>
+{% endfor %}
+</ul>
+{% if objects %}
+<form method="POST">
+    {% csrf_token %}
+    <input type="submit" value="Place Order">
+</form>
+{% endif %}
+
+{% endblock %}

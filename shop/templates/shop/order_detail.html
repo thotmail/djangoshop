@@ -1,0 +1,14 @@
+{% extends "shop/base_generic.html" %}
+
+{% block content %}
+<h1>Order: {{order.pk}}</h1>
+<ul class='data-list'>
+{% for o in order.orderedproducts_set.all %}
+    <li>
+        <a href="{% url 'shop:product_detail' o.product.pk %}">{{ o.product.name | title}}</a> 
+        - {{ o.price }} Qty. {{o.quantity}}
+    </li>
+{% endfor %}
+</ul>
+
+{% endblock %}

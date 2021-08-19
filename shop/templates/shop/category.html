@@ -1,0 +1,16 @@
+{% extends "shop/base_generic.html" %}
+
+{% block content %}
+
+<h1>Categories</h1>
+<ul class='data-list'>
+{% for cat in object_list %}
+    <li>
+        <a href="{% url 'shop:category_detail' cat.pk %}">{{ cat.name}}</a> 
+    </li>
+{% empty %}
+    <li>No categories... Weird huh?</li>
+{% endfor %}
+</ul>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "shop/base_generic.html" %}
+
+{% block content %}
+
+<h1>Orders<b id="cart"></b></h1>
+<ul class='data-list'>
+{% for order in object_list %}
+    <li>
+        Order ID: <a href="{% url 'shop:order_detail' order.pk %}">{{order.pk}}</a>
+        - {{ order.date }}
+    </li>
+{% empty %}
+    <li>You have not made any orders yet</li>
+{% endfor %}
+</ul>
+
+
+{% endblock %}

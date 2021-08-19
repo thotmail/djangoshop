@@ -1,0 +1,30 @@
+{% extends "shop/base_generic.html" %}
+
+{% block content %}
+<div id="path">
+    <a href="{%url 'shop:index'%}"> Home </a>
+    {% for cat in product.category.get_parents %}
+    > <a href="{% url 'shop:category_detail' cat.pk %}">{{cat}}</a>
+    {% endfor %}
+    >  <a href="{% url 'shop:product_detail' product.pk %}">{{product.name}}</a>
+    </div>
+<h1 id="name">{{product.name | title}}</h1>
+<h3>Price: {{ product.price }}</h3>
+{% if product.quantity > 0 %}
+<h3>In stock: {{ product.quantity }}</h3>
+{% else %}
+<h3>Out of stock</h3>
+{% endif %}
+
+{% if user.is_authenticated %}
+<b class="hidden" id="pk">{{product.pk}}</b>
+<br><br>
+<label for="quantity">Quantity:</label>
+<br>
+<input type="number" step="1" id="quantity" min="0" size="2" max="{{ product.quantity }}">
+<br><br>
+<button id="addCart">Add to cart</button>
+
+{% endif %}
+
+{% endblock %}

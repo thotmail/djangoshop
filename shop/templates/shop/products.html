@@ -1,0 +1,17 @@
+{% extends "shop/base_generic.html" %}
+
+{% block content %}
+
+<h1>Products</h1>
+<ul class='data-list'>
+{% for product in object_list %}
+    <li>
+        <a href="{% url 'shop:product_detail' product.pk %}">{{ product.name | title}}</a> 
+        - {{ product.price }}
+    </li>
+{% empty %}
+    <li>We're not selling stuff yet.</li>
+{% endfor %}
+</ul>
+
+{% endblock %}

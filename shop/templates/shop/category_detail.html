@@ -1,0 +1,29 @@
+{% extends "shop/base_generic.html" %}
+
+{% block content %}
+<div id="path">
+<a href="{%url 'shop:index'%}"> Home </a>
+{% for cat in category.get_parents %}
+> <a href="{% url 'shop:category_detail' cat.pk %}">{{cat}}</a>
+{% endfor %}
+</div>
+<h1 id="name">{{category.name | title}}</h1>
+<div id="children">
+    Sub-categories: 
+{% for child in category.category_set.all %}
+<a href="{% url 'shop:category_detail' child.pk %}"> {{ child }} </a>
+{%empty%}
+None
+{% endfor %}
+</div>
+<br>
+<ul class='data-list'>
+{% for product in category.product_set.all %}
+<li>
+    <a href="{% url 'shop:product_detail' product.pk %}">{{ product.name | title}}</a> 
+        - {{ product.price }}
+</li>
+{% endfor %}
+</ul>
+
+{% endblock %}
